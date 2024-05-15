@@ -20,3 +20,6 @@ en:
   answer_email:
     subject: 'Your question has been answered'
     your_question: 'Your question:'
+  spree:
+    products_qa:
+      config_name: 'Spree Products QA'
