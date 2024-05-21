@@ -1,6 +1,6 @@
 Spree::Core::Engine.routes.draw do
   namespace :admin do
-    resources :products do
+    resources :products, find_by: :slug do
       resources :product_questions, path: :questions
     end
 
