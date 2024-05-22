@@ -22,4 +22,4 @@ en:
     your_question: 'Your question:'
   spree:
     products_qa:
-      config_name: 'Spree Products QA'
+      config_name: 'Questions'
