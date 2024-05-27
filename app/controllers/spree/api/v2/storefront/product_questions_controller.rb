@@ -17,7 +17,7 @@ module Spree
           def create
             @product_question = Spree::ProductQuestion.new(product_question_params)
             @product_question.product = @product
-            @product_question.user = spree_current_user if spree_user_signed_in?
+            @product_question.user = spree_current_user
 
             render_result(@product_question)
           end
@@ -57,7 +57,7 @@ module Spree
           end
 
           def permitted_product_question_attributes
-            [:content, :visible]
+            [:content, :visible, :email, :full_name, :is_anonymous]
           end
 
           def product_question_params
