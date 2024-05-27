@@ -4,8 +4,6 @@ module Spree
       module Storefront
         module Account
           class ProductQuestionsAnswersController < ::Spree::Api::V2::ResourceController
-            before_action :require_spree_current_user
-
             # GET /api/v2/storefront/account/product_questions_answers
             def index
               render_serialized_payload { serialize_collection(resource) }
@@ -14,7 +12,11 @@ module Spree
             private
 
             def resource
-              resource_finder.user_product_questions(spree_current_user.id)
+              if spree_current_user
+                resource_finder.for_authorized_user(spree_current_user.id)
+              else
+                resource_finder.for_unauthorized_user
+              end
             end
 
             def collection_serializer

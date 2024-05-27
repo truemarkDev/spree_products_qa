@@ -10,11 +10,19 @@ class Spree::ProductQuestion < ActiveRecord::Base
   scope :visible, -> { where(is_visible: true) }
   scope :answered, -> { joins(:product_answer) }
   scope :not_answered, -> { where.not(id: self.answered.pluck(:id)) }
-  scope :user_product_questions, ->(user_id) { where('spree_product_questions.user_id = ?', user_id) }
+  scope :user_product_questions, ->(user_id) { where('spree_product_questions.user_id = ?', user_id) }\
 
   validates :content, presence: true
 
   def answer_for_form
     self.product_answer.present? ? self.product_answer : self.build_product_answer
+  end
+
+  def self.for_unauthorized_user
+    answered.visible
+  end
+
+  def self.for_authorized_user(user_id)
+    answered.visible + not_answered.user_product_questions(user_id)
   end
 end
