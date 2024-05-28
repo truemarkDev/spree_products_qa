@@ -9,8 +9,8 @@ class Spree::ProductQuestion < ActiveRecord::Base
   default_scope -> { order('spree_product_questions.created_at DESC') }
   scope :visible, -> { where(is_visible: true) }
   scope :answered, -> { joins(:product_answer) }
-  scope :not_answered, -> { where.not(id: self.answered.pluck(:id)) }
-  scope :user_product_questions, ->(user_id) { where('spree_product_questions.user_id = ?', user_id) }\
+  scope :not_answered, -> { left_outer_joins(:product_answer).where(spree_product_answers: { id: nil }) }
+  scope :user_product_questions, ->(user_id) { where('spree_product_questions.user_id = ?', user_id) }
 
   validates :content, presence: true
 
@@ -18,11 +18,11 @@ class Spree::ProductQuestion < ActiveRecord::Base
     self.product_answer.present? ? self.product_answer : self.build_product_answer
   end
 
-  def self.for_unauthorized_user
-    answered.visible
-  end
-
-  def self.for_authorized_user(user_id)
-    answered.visible + not_answered.user_product_questions(user_id)
+  def self.for_user(user = nil)
+    if user
+      left_outer_joins(:product_answer).where('spree_product_questions.user_id = :user_id OR spree_product_answers.id IS NOT NULL AND spree_product_questions.is_visible = true', user_id: user.id)
+    else
+      answered.visible
+    end
   end
 end

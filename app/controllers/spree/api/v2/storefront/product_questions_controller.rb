@@ -5,9 +5,10 @@ module Spree
         class ProductQuestionsController < ::Spree::Api::V2::ResourceController
           include Spree::Api::V2::CollectionOptionsHelpers
           before_action :load_product, only: [:index, :create]
+          before_action :require_spree_current_user, only: [:create] unless SpreeProductsQa::Config[:allow_anonymous]
 
           def index
-            render_serialized_payload {serialize_collection(paginated_collection)}
+            render_serialized_payload { serialize_collection(paginated_collection) }
           end
 
           def show
@@ -49,7 +50,7 @@ module Spree
           end
 
           def collection
-            Spree::ProductQuestion.visible.where(product: @product)
+            Spree::ProductQuestion.for_user(spree_current_user).where(product: @product)
           end
 
           def load_product

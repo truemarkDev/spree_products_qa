@@ -1,6 +1,6 @@
 module Spree
   class ProductQuestionSetting < Preferences::Configuration
-    # Allow anonymoues questions.
+    # Allow anonymous questions.
     preference :allow_anonymous, :boolean, default: true
   end
 end

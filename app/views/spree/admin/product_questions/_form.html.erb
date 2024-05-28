@@ -10,9 +10,38 @@
     <%= a.text_area :content, { rows: "4", class: 'form-control' } %>
   <% end %>
 
-  <%= f.field_container :is_visible, class: ['form-group'] do %>
-    <%= f.check_box :is_visible %>
-    <%= f.label :is_visible %>
-  <% end %>
+  <div class="row form-group" style="margin-top: 20px;">
+    <div class="col-12 col-md-6">
+      <%= f.field_container :full_name do %>
+        <%= f.label :full_name, raw(Spree.t('products_qa.full_name')) %>
+        <%= f.text_field :full_name, class: "form-control" %>
+        <%= f.error_message_on :full_name %>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <%= f.field_container :email do %>
+        <%= f.label :email, raw(Spree.t('products_qa.email')) %>
+        <%= f.text_field :email, class: "form-control" %>
+        <%= f.error_message_on :email %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <%= f.field_container :is_visible, class: ['form-group'] do %>
+        <%= f.check_box :is_visible %>
+        <%= f.label :is_visible %>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <%= f.field_container :is_anonymous, class: ['form-group'] do %>
+        <%= f.check_box :is_anonymous %>
+        <%= f.label :is_anonymous %>
+      <% end %>
+    </div>
+  </div>
 </div>
 

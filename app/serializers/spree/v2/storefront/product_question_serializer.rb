@@ -4,7 +4,7 @@ module Spree
       class ProductQuestionSerializer < BaseSerializer
         set_type :product_question
 
-        attributes :content, :is_visible, :is_anonymous, :full_name, :email
+        attributes :content, :is_visible, :is_anonymous, :full_name, :email, :created_at
 
         has_one :product_answer
         has_one :user
