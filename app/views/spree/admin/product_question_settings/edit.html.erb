@@ -1,0 +1,22 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:product_question_settings, scope: :products_qa) %>
+<% end %>
+
+<%= form_tag admin_product_question_settings_path, method: :put do %>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="form-check">
+        <%= label_tag :allow_anonymous do %>
+          <%= preference_field_tag :allow_anonymous, SpreeProductsQa::Config[:allow_anonymous], type: :boolean %>
+          <%= Spree.t(:allow_anonymous, scope: :products_qa) %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-actions">
+        <%= button Spree.t('actions.update'), 'update' %>
+      </div>
+    </div>
+  </div>
+<% end %>

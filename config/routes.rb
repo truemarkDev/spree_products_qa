@@ -9,6 +9,8 @@ Spree::Core::Engine.routes.draw do
         get :pending
       end
     end
+
+    resource :product_question_settings, only: %i[edit update]
   end
 
   resources :product_questions, only: [:create]
@@ -17,7 +19,7 @@ Spree::Core::Engine.routes.draw do
     namespace :v2 do
       namespace :storefront do
         resources :products, only: [] do
-          resources :product_questions, only: [:index, :create]
+          resources :product_questions, only: %i[index create]
         end
 
         namespace :account do
