@@ -1,4 +1,4 @@
-class Spree::ProductQuestionsController < Spree::StoreController
+class Spree::ProductQuestionsController < Spree::Api::V2::ResourceController
   before_action :load_data
 
   def create

@@ -22,6 +22,11 @@ en:
     your_question: 'Your question:'
   spree:
     products_qa:
-      config_name: 'Questions'
+      allow_anonymous: 'Allow anonymous'
+      config_name: 'Product Questions'
+      pending_questions: 'Pending Questions'
+      product_question_settings: 'Product Question Settings'
+
+
       email: 'Email'
       full_name: 'Full name'
