@@ -23,3 +23,5 @@ en:
   spree:
     products_qa:
       config_name: 'Questions'
+      email: 'Email'
+      full_name: 'Full name'
