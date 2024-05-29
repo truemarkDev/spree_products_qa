@@ -12,7 +12,12 @@
 
   <%= f.field_container :user_id, class: ['form-group'], style: 'margin-top: 10px;' do %>
     <%= f.label :user_id, Spree.t(:user) %>
-    <%= f.select(:user_id, options_from_collection_for_select(Spree::User.all, 'id', 'email'), { include_blank: Spree.t('products_qa.select_user') }, { class: 'select2' }) %>
+    <%= f.select(
+          :user_id, 
+          options_from_collection_for_select(Spree::User.all, 'id', 'email', f.object.user_id), 
+          { include_blank: Spree.t('products_qa.select_user') }, 
+          { class: 'select2' }
+        ) %>
   <% end %>
 
   <div class="row form-group" style="margin-top: 20px;">
