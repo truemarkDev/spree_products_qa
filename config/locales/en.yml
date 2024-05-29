@@ -26,7 +26,6 @@ en:
       config_name: 'Product Questions'
       pending_questions: 'Pending Questions'
       product_question_settings: 'Product Question Settings'
-
-
       email: 'Email'
       full_name: 'Full name'
+      select_user: 'Please select a user'
