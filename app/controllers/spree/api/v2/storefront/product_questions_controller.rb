@@ -23,6 +23,17 @@ module Spree
             render_result(@product_question)
           end
 
+          def update
+            @product_question = Spree::ProductQuestion.find(params[:id])
+
+            if @product_question.user == spree_current_user
+              @product_question.update(product_question_params)
+              render_serialized_payload { serialize_resource(@product_question) }
+            else
+              render_error_payload(Spree.t('products_qa.update_unauthorized'))
+            end
+          end
+
           def destroy
             @product_question = Spree::ProductQuestion.find(params[:id])
 

@@ -1,4 +1,4 @@
-module SpreeProductQuestion
+module SpreeProductsQa
   module Admin
     module MainMenu
       class QuestionBuilder
