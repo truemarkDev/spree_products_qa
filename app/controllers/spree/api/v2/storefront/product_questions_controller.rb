@@ -4,7 +4,7 @@ module Spree
       module Storefront
         class ProductQuestionsController < ::Spree::Api::V2::ResourceController
           include Spree::Api::V2::CollectionOptionsHelpers
-          before_action :load_product, only: [:index, :create]
+          before_action :load_product, only: %i[index create]
           before_action :require_spree_current_user, only: [:create] unless SpreeProductsQa::Config[:allow_anonymous]
 
           def index
@@ -21,6 +21,28 @@ module Spree
             @product_question.user = spree_current_user
 
             render_result(@product_question)
+          end
+
+          def update
+            @product_question = Spree::ProductQuestion.find(params[:id])
+
+            if @product_question.user == spree_current_user
+              @product_question.update(product_question_params)
+              render_serialized_payload { serialize_resource(@product_question) }
+            else
+              render_error_payload(Spree.t('products_qa.update_unauthorized'))
+            end
+          end
+
+          def destroy
+            @product_question = Spree::ProductQuestion.find(params[:id])
+
+            if @product_question.user == spree_current_user
+              @product_question.destroy
+              render_serialized_payload { serialize_resource(@product_question) }
+            else
+              render_error_payload(Spree.t('products_qa.delete_unauthorized'))
+            end
           end
 
           private
@@ -58,7 +80,7 @@ module Spree
           end
 
           def permitted_product_question_attributes
-            [:content, :visible, :email, :full_name, :is_anonymous]
+            %i[content visible email full_name is_anonymous id]
           end
 
           def product_question_params
@@ -67,9 +89,9 @@ module Spree
 
           def render_result(product_question)
             if product_question.save
-              render_serialized_payload {serialize_resource(product_question)}
+              render_serialized_payload { serialize_resource(product_question) }
             else
-              # TODO handle error from service
+              # TODO: handle error from service
               render_error_payload(product_question.errors)
             end
           end

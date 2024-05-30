@@ -19,7 +19,7 @@ Spree::Core::Engine.routes.draw do
     namespace :v2 do
       namespace :storefront do
         resources :products, only: [] do
-          resources :product_questions, only: %i[index create]
+          resources :product_questions, only: %i[index create update destroy]
         end
 
         namespace :account do
