@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::Question do
+describe Spree::ProductQuestion do
   subject { build_stubbed(:question) }
   context "scopes" do
     let!(:question_with_answer){ create(:question_with_answer) }

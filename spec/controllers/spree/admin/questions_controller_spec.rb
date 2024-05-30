@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::Admin::QuestionsController do
+describe Spree::Admin::ProductQuestionsController do
   stub_authorization!
 
   describe '#index' do
