@@ -29,3 +29,4 @@ en:
       email: 'Email'
       full_name: 'Full name'
       select_user: 'Please select a user'
+      delete_unauthorized: 'You are not authorized to delete this question'
