@@ -1,27 +1,25 @@
-# require: rubocop-rails
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 3.0
+  Include:
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/Appraisals'
+  Exclude:
+    - 'spec/dummy/**/*'
+    - 'lib/generators/**/*'
 
-# AllCops:
-#   DisplayCopNames: true
-#   NewCops: enable
-#   TargetRubyVersion: 2.5
-#   Include:
-#     - '**/Gemfile'
-#     - '**/Rakefile'
-#     - '**/Appraisals'
-#   Exclude:
-#     - 'spec/dummy/**/*'
-#     - 'lib/generators/**/*'
+Metrics/LineLength:
+  Max: 150
 
-# Rails:
-#   Enabled: true
+# DISABLED
 
-# Metrics/LineLength:
-#   Max: 150
+Style/Documentation:
+  Enabled: false
 
-# # DISABLED
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
-# Style/Documentation:
-#   Enabled: false
-
-# Style/FrozenStringLiteralComment:
-#   Enabled: false
+# Import the rubocop-rails gem configuration
+require:
+  - rubocop-rails
