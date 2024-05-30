@@ -8,7 +8,7 @@ module Spree
 
             # GET /api/v2/storefront/account/product_questions_answers
             def index
-              render_serialized_payload { serialize_collection(resource) }
+              render_serialized_payload { serialize_collection(paginated_collection) }
             end
 
             private
@@ -21,12 +21,8 @@ module Spree
               Spree::V2::Storefront::ProductQuestionSerializer
             end
 
-            def serialize_collection(collection)
-              collection_serializer.new(
-                collection,
-                include: resource_includes,
-                fields: sparse_fields
-              ).serializable_hash
+            def paginated_collection
+              collection_paginator.new(resource, params).call
             end
 
             def resource_finder

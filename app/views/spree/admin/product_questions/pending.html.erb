@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @collection.each do |product| %>
+      <% @collection.uniq.each do |product| %>
         <tr class="<%= cycle('odd', 'even') %>">
           <td>
             <%= link_to product.name, edit_admin_product_path(product) %>
