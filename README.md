@@ -1,54 +1,41 @@
-SpreeProductsQA
-===============
-[![Build Status](https://travis-ci.org/netguru/spree_products_qa.png)](https://travis-ci.org/netguru/spree_products_qa)
-[![Coverage Status](https://coveralls.io/repos/netguru/spree_products_qa/badge.png?branch=master)](https://coveralls.io/r/netguru/spree_products_qa?branch=master)
-[![Code Climate](https://codeclimate.com/github/netguru/spree_products_qa.png)](https://codeclimate.com/github/netguru/spree_products_qa)
+# Spree Products qa
 
-This extension adds Q&A Sections for products. Logged in users can ask a question, and then admins are able to answer it.
-All answered (and accepted) questions are displayed on a product page.
+This is a Products qa extension for [Spree Commerce](https://spreecommerce.org), an open source e-commerce platform built with Ruby on Rails.
 
-This project is a fork of [spree_product_qa](https://github.com/netguru/spree_products_qa) by Netguru.
-This is being actively maintained by [Truemark Technology](https://www.truemark.dev) to support spree 4.0 and later versions.
+## Installation
 
-How does it work?
--------------
-Install this extension and edit any product.
-While editing product, there's now a new section in the submenu - Questions and Answers.
-In this panel you can add or answer any question. Simple enough? :)
+1. Add spree_products_qa to your Gemfile:
 
-TODO:
-- [] Setup Ability so that user can see the product questions before admin approved
+    ```ruby
+    gem 'spree_products_qa', git: 'https://github.com/TruemarkDev/spree_products_qa.git', branch: 'master'
+    ```
 
-Installation
-------------
+2. Copy & run migrations
 
-Add spree_products_qa to your Gemfile:
+    ```ruby
+    bundle
+    bundle exec rails g spree_products_qa:install
+    ```
 
-```ruby
-gem 'spree_products_qa', git: 'https://github.com/TruemarkDev/spree_products_qa.git', branch: 'master'
-```
+3. Restart your server
 
-Bundle your dependencies and run the installation generator:
+  If your server was running, restart it so that it can find the assets properly.
 
-```shell
-bundle
-bundle exec rails g spree_products_qa:install
-```
+## Developing
 
-Additional info
----------------
-Currently supported Spree version: 4.x.x+
+1. Create a dummy app
 
-Testing
--------
+    ```bash
+    bundle update
+    bundle exec rake test_app
+    ```
 
-Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
+2. Add your new code
+3. Run tests
 
-```shell
-bundle
-bundle exec rake test_app
-bundle exec rspec spec
-```
+    ```bash
+    bundle exec rspec
+    ```
 
 When testing your applications integration with this extension you may use it's factories.
 Simply add this require statement to your spec_helper:
@@ -56,5 +43,20 @@ Simply add this require statement to your spec_helper:
 ```ruby
 require 'spree_products_qa/factories'
 ```
+
+## Releasing a new version
+
+```shell
+bundle exec gem bump -p -t
+bundle exec gem release
+```
+
+For more options please see [gem-release README](https://github.com/svenfuchs/gem-release)
+
+## Contributing
+
+If you'd like to contribute, please take a look at the
+[instructions](CONTRIBUTING.md) for installing dependencies and crafting a good
+pull request.
 
 Copyright (c) 2014 [Netguru](https://netguru.co), released under the New BSD License.
