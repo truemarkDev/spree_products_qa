@@ -67,7 +67,6 @@ describe Spree::Api::V2::Storefront::ProductQuestionsController, type: :request 
     end
 
     it 'updates a question' do
-      # sign_in(user)
       put "/api/v2/storefront/products/#{product.id}/product_questions/#{question.id}", params: question_params
 
       expect(response).to have_http_status(:ok)
