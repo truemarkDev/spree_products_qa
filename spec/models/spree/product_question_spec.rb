@@ -5,8 +5,8 @@ describe Spree::ProductQuestion do
     let!(:user_1) { create(:user, email: 'first@test.com') }
     let!(:user_2) { create(:user, email: 'second@test.com') }
 
-    let!(:valid_user_question) { create(:question_answer, user_id: user_1.id) }
-    let!(:other_user_question) { create(:question_answer, user_id: user_2.id) }
+    let!(:valid_user_question) { create(:question_with_answer, user_id: user_1.id) }
+    let!(:other_user_question) { create(:question_with_answer, user_id: user_2.id) }
 
     describe 'user_product_questions' do
       it 'returns only users questions and answers' do
