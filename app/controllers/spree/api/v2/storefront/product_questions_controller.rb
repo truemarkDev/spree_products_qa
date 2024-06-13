@@ -18,7 +18,7 @@ module Spree
           def create
             @product_question = Spree::ProductQuestion.new(product_question_params)
             @product_question.product = @product
-            @product_question.user = spree_current_user
+            @product_question.user_id = spree_current_user.id
 
             render_result(@product_question)
           end
@@ -26,7 +26,7 @@ module Spree
           def update
             @product_question = Spree::ProductQuestion.find(params[:id])
 
-            if @product_question.user == spree_current_user
+            if @product_question.user_id == spree_current_user.id
               @product_question.update(product_question_params)
               render_serialized_payload { serialize_resource(@product_question) }
             else
@@ -37,7 +37,7 @@ module Spree
           def destroy
             @product_question = Spree::ProductQuestion.find(params[:id])
 
-            if @product_question.user == spree_current_user
+            if @product_question.user_id == spree_current_user.id
               @product_question.destroy
               render_serialized_payload { serialize_resource(@product_question) }
             else
