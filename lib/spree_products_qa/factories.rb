@@ -4,7 +4,6 @@ module SpreeProductsQa
       factory :product_question, class: 'Spree::ProductQuestion' do
         content { 'What is the question?' }
         association :product, factory: :base_product
-        # association :user, factory: :custom_user
 
         factory :question_with_answer do
           after(:create) do |question|
