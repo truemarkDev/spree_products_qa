@@ -6,6 +6,6 @@ class Spree::ProductAnswer < ActiveRecord::Base
   after_create :send_email, if: ->() { SpreeProductsQa.send_email? }
 
   def send_email
-    QaMailerWorker.perform_async(self.question.id) if self.question.present?
+    QaAnswerMailer.answer_email(self.product_question).deliver_later if self.product_question.present?
   end
 end
