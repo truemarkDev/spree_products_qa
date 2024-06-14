@@ -2,7 +2,7 @@ module SpreeProductsQa
   module Factories
     FactoryBot.define do
       factory :product_question, class: 'Spree::ProductQuestion' do
-        content { 'What is the question?' }
+        content { Faker::Lorem.question }
         association :product, factory: :base_product
 
         factory :question_with_answer do
@@ -13,7 +13,7 @@ module SpreeProductsQa
       end
 
       factory :product_answer, class: 'Spree::ProductAnswer' do
-        content { 'Answer' }
+        content { Faker::Lorem.sentence }
         association :product_question
       end
     end
