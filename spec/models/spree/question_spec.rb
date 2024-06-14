@@ -37,16 +37,16 @@ describe Spree::ProductQuestion do
       end
     end
 
-    describe '.for_user' do
+    describe 'for_user' do
       let(:user) { create(:user) }
       let(:question) { create(:product_question, user_id: user.id) }
       let(:visible_question) { create(:question_with_answer, is_visible: true) }
 
-      it 'returns questions for user' do
+      it 'returns visible and pending questions by self for authorized user' do
         expect(described_class.for_user(user)).to include(question, visible_question)
       end
 
-      it 'returns empty array if no questions for user' do
+      it 'returns only visible questions for anonymous user' do
         expect(described_class.for_user).to include(visible_question)
         expect(described_class.for_user).not_to include(question)
       end
