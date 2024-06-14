@@ -27,7 +27,6 @@ describe Spree::Api::V2::Storefront::ProductQuestionsController, type: :request 
     it 'shows visible + pending questions asked by self for an authorized user' do
       get "/api/v2/storefront/products/#{product.id}/product_questions"
       json_response = JSON.parse(response.body)
-      puts json_response
 
       expect(json_response['data']).to be_an(Array)
       question_ids = json_response['data'].map { |question| question['id'].to_i }
@@ -51,8 +50,6 @@ describe Spree::Api::V2::Storefront::ProductQuestionsController, type: :request 
       expect(response).to have_http_status(:ok)
       json_response = JSON.parse(response.body)
 
-      puts json_response
-
       expect(json_response['data']).to have_attribute(:content).with_value('What is the product lifespan ?')
     end
   end
@@ -68,7 +65,6 @@ describe Spree::Api::V2::Storefront::ProductQuestionsController, type: :request 
 
     it 'updates a question' do
       put "/api/v2/storefront/products/#{product.id}/product_questions/#{question.id}", params: question_params
-
       expect(response).to have_http_status(:ok)
       json_response = JSON.parse(response.body)
 
