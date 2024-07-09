@@ -13,6 +13,7 @@ gem 'spree_emails', spree_opts
 
 gem 'spree_backend', github: 'spree/spree_backend', branch: 'main'
 gem 'spree_frontend', github: 'spree/spree_rails_frontend', branch: 'main'
+gem 'spree_multi_vendor', github: 'spreehood/spree_multi_vendor'
 
 if ENV['DB'] == 'mysql'
   gem 'mysql2'

@@ -25,4 +25,8 @@ class Spree::ProductQuestion < ActiveRecord::Base
       answered.visible
     end
   end
+
+  def self.vendor_product_questions(id)
+    joins(:product).where(spree_products: { vendor_id: id })
+  end
 end
