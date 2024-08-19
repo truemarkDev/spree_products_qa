@@ -25,4 +25,14 @@ class Spree::ProductQuestion < ActiveRecord::Base
       answered.visible
     end
   end
+
+  def self.filter_questions(questions, params)
+    if params[:filter] == 'answered'
+      questions.answered
+    elsif params[:filter] == 'not_answered'
+      questions.not_answered
+    else
+      questions
+    end
+  end
 end
