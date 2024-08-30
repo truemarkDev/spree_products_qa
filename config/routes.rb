@@ -26,6 +26,12 @@ Spree::Core::Engine.routes.draw do
           resources :product_questions_answers, controller: :product_questions_answers, only: %i[index]
         end
       end
+
+      namespace :vendor do
+        resources :vendors, only: [] do
+          resources :product_questions, only: %i[index show update destroy]
+        end
+      end
     end
   end
 end
