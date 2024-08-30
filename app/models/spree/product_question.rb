@@ -26,6 +26,16 @@ class Spree::ProductQuestion < ActiveRecord::Base
     end
   end
 
+  def self.filter_questions(questions, params)
+    if params[:filter] == 'answered'
+      questions.answered
+    elsif params[:filter] == 'not_answered'
+      questions.not_answered
+    else
+      questions
+    end
+  end
+
   def self.vendor_product_questions(id)
     joins(:product).where(spree_products: { vendor_id: id })
   end

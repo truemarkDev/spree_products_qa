@@ -71,8 +71,12 @@ module Spree
             collection_paginator.new(collection, params).call
           end
 
-          def collection
+          def product_questions
             Spree::ProductQuestion.for_user(spree_current_user).where(product: @product)
+          end
+
+          def collection
+            Spree::ProductQuestion.filter_questions(product_questions, params) if @product
           end
 
           def load_product

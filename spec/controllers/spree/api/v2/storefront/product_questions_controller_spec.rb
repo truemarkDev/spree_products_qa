@@ -34,6 +34,30 @@ describe Spree::Api::V2::Storefront::ProductQuestionsController, type: :request 
       expect(question_ids).to include(visible_question.id)
       expect(question_ids).to include(question.id)
     end
+
+    context 'with filter' do
+      it 'shows only answered questions' do
+        get "/api/v2/storefront/products/#{product.id}/product_questions?filter=answered"
+        json_response = JSON.parse(response.body)
+
+        expect(json_response['data']).to be_an(Array)
+        question_ids = json_response['data'].map { |question| question['id'].to_i }
+
+        expect(question_ids).to include(visible_question.id)
+        expect(question_ids).not_to include(question.id)
+      end
+
+      it 'shows only not answered questions' do
+        get "/api/v2/storefront/products/#{product.id}/product_questions?filter=not_answered"
+        json_response = JSON.parse(response.body)
+
+        expect(json_response['data']).to be_an(Array)
+        question_ids = json_response['data'].map { |question| question['id'].to_i }
+
+        expect(question_ids).to include(question.id)
+        expect(question_ids).not_to include(visible_question.id)
+      end
+    end
   end
 
   describe '#create' do

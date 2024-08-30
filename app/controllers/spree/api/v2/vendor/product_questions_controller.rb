@@ -60,7 +60,7 @@ module Spree
           end
 
           def product_question_params
-            params.require(:product_question).permit(:is_visible, product_answer_attributes: [:content, ])
+            params.require(:product_question).permit(:is_visible, product_answer_attributes: [:content])
           end
 
           def resource
